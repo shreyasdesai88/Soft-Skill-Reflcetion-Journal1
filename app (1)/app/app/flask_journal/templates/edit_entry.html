@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+
+{% block title %}Edit Daily Entry - Soft Skills Journal{% endblock %}
+
+{% block content %}
+<div class="dashboard-container">
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-9">
+                <div class="entry-form-card shadow-sm p-4 bg-white rounded">
+                    <h1 class="page-title mb-4 text-primary">Edit Daily Soft Skills Journal</h1>
+                    
+                    <form method="POST" action="{{ url_for('edit_entry', entry_id=entry['id']) }}">
+                        
+                        <!-- Skills Assessment Section -->
+                        <div class="prompts-section mb-4">
+                            <h5 class="mb-3"><i class="bi bi-star-fill"></i> Soft Skills Practiced Today</h5>
+                            <p class="text-muted small mb-3">Select the skills you worked on or demonstrated:</p>
+                            
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" name="skills" value="Communication" id="skill1" {% if 'Communication' in (entry['skills'] or '') %}checked{% endif %}>
+                                        <label class="form-check-label" for="skill1">🗣️ Communication</label>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" name="skills" value="Leadership" id="skill2" {% if 'Leadership' in (entry['skills'] or '') %}checked{% endif %}>
+                                        <label class="form-check-label" for="skill2">👥 Leadership</label>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" name="skills" value="Problem-Solving" id="skill3" {% if 'Problem-Solving' in (entry['skills'] or '') %}checked{% endif %}>
+                                        <label class="form-check-label" for="skill3">🧠 Problem-Solving</label>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" name="skills" value="Teamwork" id="skill4" {% if 'Teamwork' in (entry['skills'] or '') %}checked{% endif %}>
+                                        <label class="form-check-label" for="skill4">🤝 Teamwork</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" name="skills" value="Time Management" id="skill5" {% if 'Time Management' in (entry['skills'] or '') %}checked{% endif %}>
+                                        <label class="form-check-label" for="skill5">⏰ Time Management</label>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" name="skills" value="Confidence" id="skill6" {% if 'Confidence' in (entry['skills'] or '') %}checked{% endif %}>
+                                        <label class="form-check-label" for="skill6">💪 Confidence</label>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" name="skills" value="Active Listening" id="skill7" {% if 'Active Listening' in (entry['skills'] or '') %}checked{% endif %}>
+                                        <label class="form-check-label" for="skill7">👂 Active Listening</label>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" name="skills" value="Adaptability" id="skill8" {% if 'Adaptability' in (entry['skills'] or '') %}checked{% endif %}>
+                                        <label class="form-check-label" for="skill8">🔄 Adaptability</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Mood Section -->
+                        <div class="prompts-section mb-4">
+                            <h5 class="mb-3"><i class="bi bi-emoji-smile"></i> How was your mood today?</h5>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="d-flex gap-3 flex-wrap">
+                                        <div class="form-check">
+                                            <input class="form-check-input mood-radio" type="radio" name="mood" value="Great" id="moodGreat" {% if entry['mood'] == 'Great' %}checked{% endif %}>
+                                            <label class="form-check-label mood-label" for="moodGreat">😄 Great</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input mood-radio" type="radio" name="mood" value="Good" id="moodGood" {% if entry['mood'] == 'Good' %}checked{% endif %}>
+                                            <label class="form-check-label mood-label" for="moodGood">🙂 Good</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input mood-radio" type="radio" name="mood" value="Okay" id="moodOkay" {% if entry['mood'] == 'Okay' %}checked{% endif %}>
+                                            <label class="form-check-label mood-label" for="moodOkay">😐 Okay</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input mood-radio" type="radio" name="mood" value="Stressed" id="moodStressed" {% if entry['mood'] == 'Stressed' %}checked{% endif %}>
+                                            <label class="form-check-label mood-label" for="moodStressed">😰 Stressed</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input mood-radio" type="radio" name="mood" value="Frustrated" id="moodFrustrated" {% if entry['mood'] == 'Frustrated' %}checked{% endif %}>
+                                            <label class="form-check-label mood-label" for="moodFrustrated">😠 Frustrated</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Daily Reflection Section -->
+                        <div class="prompts-section mb-4">
+                            <h5 class="mb-3"><i class="bi bi-pencil-square"></i> Your Daily Reflection</h5>
+                            <p class="text-muted small mb-3">Update your thoughts about today:</p>
+                            <textarea class="form-control" name="content" rows="6" required>{{ entry['content'] }}</textarea>
+                        </div>
+
+                        <div class="d-flex gap-3 pt-3">
+                            <button type="submit" class="btn btn-primary btn-lg px-5">💾 Save Changes</button>
+                            <a href="{{ url_for('daily_entries') }}" class="btn btn-outline-secondary btn-lg px-4">Cancel</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.mood-label {
+    cursor: pointer;
+    padding: 8px 12px;
+    border-radius: 8px;
+    transition: background-color 0.2s;
+}
+
+.mood-radio:checked + .mood-label {
+    background-color: #e8f4f8;
+    font-weight: 600;
+}
+</style>
+{% endblock %}

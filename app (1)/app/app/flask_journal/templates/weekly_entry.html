@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %}Weekly Reflection - Soft Skills Journal{% endblock %}
+
+{% block content %}
+<div class="dashboard-container">
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="entry-form-card shadow-sm p-4 bg-white rounded border-top border-4 border-success">
+                    <h1 class="page-title mb-2 text-success">Weekly Reflection</h1>
+                    <p class="text-muted mb-4">Review your progress and set goals for the coming week.</p>
+                    
+                    <form method="POST" action="{{ url_for('weekly_entry') }}">
+                        
+                        <div class="mb-4">
+                            <label for="summary" class="form-label fw-semibold">
+                                <i class="bi bi-star-fill text-warning"></i> Weekly Summary:
+                            </label>
+                            <textarea class="form-control" id="summary" name="summary" rows="5" required
+                                placeholder="Summarize your week:&#10;- Best Soft-Skill Moment&#10;- Main Skill to Improve&#10;- Action Plan for Next Week"></textarea>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="score" class="form-label fw-bold">Weekly Reflection Score:</label>
+                            <div class="d-flex gap-2 align-items-center">
+                                <input type="range" class="form-range flex-grow-1" id="score" name="score" min="1" max="10" value="5" required>
+                                <span class="badge bg-success" id="scoreDisplay">5</span>
+                            </div>
+                            <div class="form-text">Rate your overall soft skills progress this week (1-10)</div>
+                        </div>
+
+                        <div class="d-flex gap-3 pt-3">
+                            <button type="submit" class="btn btn-success btn-lg px-5">Save Weekly Review</button>
+                            <a href="{{ url_for('dashboard') }}" class="btn btn-outline-secondary btn-lg px-4">Back to Dashboard</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// Update score display when slider changes
+document.getElementById('score').addEventListener('input', function() {
+    document.getElementById('scoreDisplay').textContent = this.value;
+});
+</script>
+{% endblock %}

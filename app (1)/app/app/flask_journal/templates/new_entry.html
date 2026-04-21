@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+
+{% block title %}Daily Goals - Soft Skills Journal{% endblock %}
+
+{% block content %}
+<div class="dashboard-container">
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-9">
+                <div class="entry-form-card shadow-sm p-4 bg-white rounded">
+                    <h1 class="page-title mb-4 text-primary">Daily Soft Skills Journal </h1>
+                    
+                    <form method="POST" action="{{ url_for('new_entry') }}">
+                        
+                        <!-- Skills Assessment Section -->
+                        <div class="prompts-section mb-4">
+                            <h5 class="mb-3"><i class="bi bi-star-fill"></i> Soft Skills Practiced Today</h5>
+                            <p class="text-muted small mb-3">Select the skills you worked on or demonstrated:</p>
+                            
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" name="skills" value="Communication" id="skill1">
+                                        <label class="form-check-label" for="skill1">🗣️ Communication</label>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" name="skills" value="Leadership" id="skill2">
+                                        <label class="form-check-label" for="skill2">👥 Leadership</label>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" name="skills" value="Problem-Solving" id="skill3">
+                                        <label class="form-check-label" for="skill3">🧠 Problem-Solving</label>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" name="skills" value="Teamwork" id="skill4">
+                                        <label class="form-check-label" for="skill4">🤝 Teamwork</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" name="skills" value="Time Management" id="skill5">
+                                        <label class="form-check-label" for="skill5">⏰ Time Management</label>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" name="skills" value="Confidence" id="skill6">
+                                        <label class="form-check-label" for="skill6">💪 Confidence</label>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" name="skills" value="Active Listening" id="skill7">
+                                        <label class="form-check-label" for="skill7">👂 Active Listening</label>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" name="skills" value="Adaptability" id="skill8">
+                                        <label class="form-check-label" for="skill8">🔄 Adaptability</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Daily Reflection -->
+                        <div class="mb-4">
+                            <h5 class="mb-3"><i class="bi bi-journal-text"></i> Daily Reflection</h5>
+                            <label for="content" class="form-label fw-semibold">Describe your day & soft skills experience:</label>
+                            <textarea class="form-control" id="content" name="content" rows="6" required 
+                                placeholder="What happened today? How did you handle challenges? What went well?"></textarea>
+                        </div>
+
+                        <!-- Overall Mood -->
+                        <div class="mb-4">
+                            <label class="form-label fw-semibold">How was your day overall?</label>
+                            <div class="d-flex gap-4">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="mood" value="Happy" id="mood1" required>
+                                    <label class="form-check-label" for="mood1">😊 Happy</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="mood" value="Neutral" id="mood2">
+                                    <label class="form-check-label" for="mood2">😐 Neutral</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="mood" value="Sad" id="mood3">
+                                    <label class="form-check-label" for="mood3">😔 Sad</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-flex gap-3 mt-5">
+                            <button type="submit" class="btn btn-primary btn-lg px-5">Save Daily Entry</button>
+                            <a href="{{ url_for('dashboard') }}" class="btn btn-outline-secondary btn-lg px-4">Cancel</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

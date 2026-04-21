@@ -1,0 +1,165 @@
+{% extends "base.html" %}
+
+{% block title %}Daily Entries - Soft Skills Journal{% endblock %}
+
+{% block content %}
+<div class="dashboard-container">
+    <div class="container py-5">
+        <div class="row mb-5">
+            <div class="col-12">
+                <h1 class="page-title mb-2">Daily Entries</h1>
+                <p class="text-muted">Review your daily soft skills reflections</p>
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="row mb-5">
+            <div class="col-12">
+                <a href="{{ url_for('new_entry') }}" class="btn btn-primary btn-lg me-2">
+                    ➕ New Daily Entry
+                </a>
+                <a href="{{ url_for('dashboard') }}" class="btn btn-outline-secondary btn-lg">
+                    ← Back to Dashboard
+                </a>
+            </div>
+        </div>
+
+        <!-- Daily Entries Display -->
+        <h4 class="mb-4">Your Reflections</h4>
+
+        {% if entries %}
+        <div class="row">
+            {% for entry in entries %}
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card shadow-sm p-4 h-100 border-left-primary entry-card">
+                    
+                    <!-- Header -->
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <div>
+                            <h6 class="mb-1 text-muted">
+                                📅 {{ entry['created_at'][:10] }}
+                            </h6>
+                            <p class="text-muted small">
+                                {{ entry['created_at'][11:16] }}
+                            </p>
+                        </div>
+                        <span class="mood-badge" data-mood="{{ entry['mood'] }}">
+                            {% if entry['mood'] == 'Great' %}
+                                😄 Great
+                            {% elif entry['mood'] == 'Good' %}
+                                🙂 Good
+                            {% elif entry['mood'] == 'Okay' %}
+                                😐 Okay
+                            {% elif entry['mood'] == 'Stressed' %}
+                                😰 Stressed
+                            {% elif entry['mood'] == 'Frustrated' %}
+                                😠 Frustrated
+                            {% else %}
+                                {{ entry['mood'] }}
+                            {% endif %}
+                        </span>
+                    </div>
+
+                    <!-- Content -->
+                    <div class="mb-3">
+                        <p class="card-text">
+                            {{ entry['content'][:200] }}
+                            {% if entry['content']|length > 200 %}
+                                <span class="text-muted">...</span>
+                            {% endif %}
+                        </p>
+                    </div>
+
+                    <!-- Skills -->
+                    {% if entry['skills'] and entry['skills'] != 'None' %}
+                    <div class="mb-3">
+                        <p class="text-muted small mb-2">
+                            <strong>Skills Practiced:</strong>
+                        </p>
+                        <div class="d-flex flex-wrap gap-1">
+                            {% for skill in entry['skills'].split(', ') %}
+                            <span class="badge bg-info">{{ skill }}</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endif %}
+
+                    <!-- Action Buttons -->
+                    <div class="d-flex gap-2 mt-4 pt-3 border-top">
+                        <a href="{{ url_for('edit_entry', entry_id=entry['id']) }}" class="btn btn-sm btn-outline-primary flex-grow-1">
+                            ✏️ Edit
+                        </a>
+                        <form method="POST" action="{{ url_for('delete_entry', entry_id=entry['id']) }}" style="flex-grow: 1;" onsubmit="return confirm('Are you sure you want to delete this entry?');">
+                            <button type="submit" class="btn btn-sm btn-outline-danger w-100">
+                                🗑️ Delete
+                            </button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        {% else %}
+        <div class="text-center py-5">
+            <div class="empty-state">
+                <p class="text-muted mb-3">📝 No daily entries yet</p>
+                <p class="text-muted mb-4">Start your soft skills journey by creating your first daily entry!</p>
+                <a href="{{ url_for('new_entry') }}" class="btn btn-primary btn-lg">
+                    ➕ Create Your First Entry
+                </a>
+            </div>
+        </div>
+        {% endif %}
+
+    </div>
+</div>
+
+<style>
+.entry-card {
+    transition: transform 0.2s, box-shadow 0.2s;
+    border-left: 4px solid #667eea !important;
+}
+
+.entry-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+}
+
+.mood-badge {
+    padding: 0.5rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    background-color: #f0f0f0;
+    color: #333;
+    white-space: nowrap;
+}
+
+.mood-badge[data-mood="Great"] {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.mood-badge[data-mood="Good"] {
+    background-color: #d1ecf1;
+    color: #0c5460;
+}
+
+.mood-badge[data-mood="Okay"] {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+.mood-badge[data-mood="Stressed"],
+.mood-badge[data-mood="Frustrated"] {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.empty-state {
+    padding: 40px 20px;
+}
+</style>
+{% endblock %}
