@@ -220,5 +220,6 @@ Created as a college project demonstrating full-stack web development skills.
 
 ---
 
-**Questions or Issues?** Please feel free to open an issue or contact me.
+## Problems Faced 
+Handling backend flow and connectivity
 
