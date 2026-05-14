@@ -20,7 +20,7 @@ A web application that helps users track and improve their soft skills through d
 | **Database** | SQLite | Data persistence |
 | **Frontend** | HTML + Bootstrap | User interface |
 | **Styling** | CSS + Bootstrap | Responsive design |
-| **Security** | Bcrypt | Password encryption |
+| **Security** | Bcrypt(Hashing) | Password encryption |
 
 ## Installation
 
