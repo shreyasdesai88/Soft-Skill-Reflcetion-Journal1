@@ -215,7 +215,7 @@ Possible features for future versions:
 This project was created for educational purposes.
 
 ## Shreyas Desai 
-
+Created frontend UI and main dashboard as well as used encryption for passwords
 Created as a college project demonstrating full-stack web development skills.
 
 ---
