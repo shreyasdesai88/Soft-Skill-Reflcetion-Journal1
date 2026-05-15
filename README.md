@@ -222,4 +222,6 @@ Created as a college project demonstrating full-stack web development skills.
 
 ## Problems Faced 
 Handling backend flow and connectivity
+Ensuring bcrypt hashing
+
 
