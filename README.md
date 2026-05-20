@@ -1,6 +1,6 @@
 # 📔 Soft Skills Reflection Journal
 
-A web application that helps users track and improve their soft skills through daily and weekly journal entries, goal setting, and progress analytics.
+A web application that helps users track and improve their soft skills through daily and weekly journal entries, goal setting, and progress analytics to analyze their growth 
 
 ## Features
 
