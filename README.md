@@ -1,4 +1,4 @@
-# 📔 Soft Skills Reflection App
+# 📔 Soft Skills Reflection Application 
 
 A web application that helps users track and improve their soft skills through daily and weekly journal entries, goal setting, and progress analytics to analyze their growth 
 
